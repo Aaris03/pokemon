@@ -5,11 +5,9 @@ const Home = () => {
   const [nextPoke, setNextPoke] = useState<string>("");
   const [prevPoke, setPrevPoke] = useState<string>("");
 
-  console.log("debajo del state", pokemon)
-
-  const node = useRef<[HTMLImageElement] | null>(null);
+  const node = useRef<HTMLLIElement>(null);
   
-  const URL_All_Pokemon: string = "https://pokeapi.co/api/v2/pokemon/?limit=1";
+  const URL_All_Pokemon: string = "https://pokeapi.co/api/v2/pokemon/?limit=5";
 
   type PokeInit = {
     name: string;
@@ -19,7 +17,6 @@ const Home = () => {
   };
 
   const getPokemon = (url: string) => {
-    //Trae a todos los pokemon
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
@@ -48,32 +45,26 @@ const Home = () => {
   };
 
   useEffect(() => {
-    console.log("Aqui estoy", pokemon);
     getPokemon(URL_All_Pokemon);
   }, []);
 
-  /*useEffect(()=>{
+  useEffect(()=>{
         
         const observer = new IntersectionObserver((entries)=>{
             entries.forEach(entry=>{
                 if(entry.isIntersecting){
-                    console.log('banana',node.current)
-                    //getPokemon(nextPoke)
+                    getPokemon(nextPoke)
                 }
             })
         })
-        if(node.current != undefined && node.current?.length > 0){
-            //console.log(node.current[node.current.length-1])
-           observer.observe(node.current[node.current.length-1])
+        if(node.current != undefined){
+           observer.observe(node.current)
         }
-        
         
         return ()=>{
             observer.disconnect()
         }
-    },[nextPoke])*/
-
-  
+    },[nextPoke])
 
   return (
     <>
@@ -84,22 +75,11 @@ const Home = () => {
         ) : (
           pokemon.map((poke: PokeInit, i: number) => {
             return (
-              <li key={i} style={{ minHeight: "300px" }}>
+              <li key={i} ref={node}>
                 <p>
                   {poke.id}-{poke.name}
                 </p>
-                <img
-                  src={poke.sprite}
-                  alt={poke.name}
-                  ref={(element) => {
-                    //console.log(element)
-                    if (node.current && element) {
-                      node.current.push(element);
-                    } else if (element) {
-                      node.current = [element];
-                    }
-                  }}
-                />
+                <img src={poke.sprite} alt={poke.name}/>
               </li>
             );
           })
