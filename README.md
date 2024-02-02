@@ -1,0 +1,27 @@
+App de pokemon
+
+- Features
+  - [] Login - Autenticacion del usuario, guardando sesion en localstorage
+    - [] Opcional - Authenticar con google, facebook o instagram
+    - [] Porteger rutas
+    - [] Arreglar la UI/UX
+    - [] Ajustar el responsive de la 
+    - [] Logout
+  - [] Vista (Listar pokemon)
+    - [☑️] Trar todos los pokemon de la api
+      -[] BugFix - estado 'pokemon' no se reinicia los valores por defecto.
+    - [☑️] Realizar un scroll infinito
+    - [] Añadir lazy loading a las imagenes
+    - [] Añadir busqueda por nombre
+    - [] Filtro por tipos pokemon
+    - [] Filtro por generacion
+    - [] Arreglar la UI/UX
+    - [] Ajustar el responsive de la vista
+  - [] Vista (Detalle de pokemon)
+    - [] Crear Url dinamicas por cada pokemon elegido
+    - [] Traer datos de cada pokemon
+    - [] Añadir funcionalidad - retorno a vista principal.
+    - [] Añadir funcionalidad - Añadir a equipo
+    - [] Añadir funcionalidad - Clasificacion personal
+  - [] Vista (Equipos)
+    - [] Listar equipo creados 
