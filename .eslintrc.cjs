@@ -31,7 +31,7 @@ module.exports = {
         "react"
     ],
     "rules": {
-        "eslint-disable-next-line react/react-in-jsx-scope":"off",
+        "eslint-disable-next-line":"off",
         "react/react-in-jsx-scope": "off",
     }
 }
