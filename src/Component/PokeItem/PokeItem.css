@@ -1,0 +1,24 @@
+.all-pokemon-box{
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.poke-item-box{
+  width: 150px;
+  height: 200px;
+  border-radius: 10px;
+  list-style-type: none;
+}
+.poke-item-img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation-name: esqueleton-loading;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+@keyframes esqueleton-loading {
+  from {opacity: 1;}
+  50% {opacity: .9;}
+  to {opacity: 1;}
+}

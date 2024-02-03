@@ -1,14 +1,14 @@
 import { type PokeInit } from "../Types/type";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export const usePokemon = () => {
 
   const [pokemon, setPokemon] = useState<PokeInit[]>([]);
   const [nextPoke, setNextPoke] = useState<string>("");
 
-  const URL_All_Pokemon: string = "https://pokeapi.co/api/v2/pokemon/?limit=5";
+  const URL_All_Pokemon: string = "https://pokeapi.co/api/v2/pokemon/?limit=50";
 
-  const getPokemon = (url:string) => {
+  const getPokemon = (url:string = URL_All_Pokemon, firts:boolean = true) => {
     fetch(url)
     .then((res) => res.json())
     .then((data) => {
@@ -27,12 +27,16 @@ export const usePokemon = () => {
         };
         return addPoke;
       });
-
-      const newPokemonArray = [...pokemon, ...pokemonArray];
-      setPokemon([...newPokemonArray]);
-      
+ 
+      if(firts){
+        setPokemon(pokemonArray);
+      }else{
+        const newPokemonArray = [...pokemon, ...pokemonArray];
+        setPokemon([...newPokemonArray]);
+      }
       setNextPoke(data.next);
     });
+
     return {pokemon, nextPoke}
   }
 
@@ -40,5 +44,7 @@ export const usePokemon = () => {
     getPokemon(URL_All_Pokemon)
   },[])
 
-  return {pokemon, nextPoke, getPokemon}
+  const node = useRef<HTMLLIElement>(null);
+
+  return {pokemon, nextPoke, getPokemon, node}
 };
